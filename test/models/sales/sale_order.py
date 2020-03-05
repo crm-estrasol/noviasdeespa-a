@@ -220,11 +220,11 @@ class NoviasSaleOrder(models.Model):
             same way when we search on partner_id, with the addition of being optimal when having a query that will
             search on partner_id and ref at the same time (which is the case when we open the bank reconciliation widget)
         """
-        cr = self._cr
-        cr.execute("SELECT * FROM public.sale_order ")  
-        po = self.env['purchase.order'].search( [('partner_id','=',3)] )
+        #cr = self._cr
+        #cr.execute("SELECT * FROM public.sale_order ")  
+        #po = self.env['purchase.order'].search( [('partner_id','=',3)] )
         #._cr.dictfetchall()
-        _logger.info("-----------------------------------"+str(self.env.user.warehouse_id.name ) )
+        #_logger.info("-----------------------------------"+str(self.env.user.warehouse_id.name ) )
         
     def purchase_service_prepare_order_values_n(self, supplierinfo):
         """ Returns the values to create the purchase order from the current SO line.
