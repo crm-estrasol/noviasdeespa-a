@@ -10,7 +10,7 @@ from  .sales.reports import sale_report
 from .mail import mail_activity
 #CRM
 from .crm import crm_lead
-from .users import res_user
+#from .users import res_user
 #STOCK
 from .stock_picking import stock_picking
 
