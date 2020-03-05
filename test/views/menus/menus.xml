@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--
+     <record id="inherit_sale_order_opportunity_t" model="ir.ui.view">
+            <field name="name">sale.order.inherit.form.opportunity.t</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="	sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="replace">
+                    <field name="opportunity_id" help="Log in the chatter from which opportunity the order originates" groups="base.group_no_one" domain="[('order_ids', '=', False )]"/>
+                </xpath>
+            </field>
+
+        </record>
+        -->
+       
+    <!-- SALES -->
+    <menuitem id="report_sales_team_w" name="Corte inventario" parent="sale.menu_sale_report" groups="sales_team.group_sale_manager" action="report_sale_wizard" sequence="3"/>
+
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_test_report,report.test.report_saledetails,report_report_test,,1,1,1,1
+access_test_report,report.test.report_saledetails,report_report_test,base.group_user,1,1,1,1
+access_test_sale_details_wizard,test.sale.details.wizard,test_sale_details_wizard,base.group_user,1,1,1,1
+
+

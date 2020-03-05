@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+
+        <record id="inherit_mail_acitvity" model="ir.ui.view">
+            <field name="name">in.mail.inherit.acitvity</field>
+            <field name="model">mail.activity</field>
+            <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='activity_type_id']" position="after">
+                    <field name="selection_actividades" readonly="1" />
+                    <field name="flagsh_shedule" invisible="1" />
+                    <field name="flagdeliv_shedule" invisible="1" />
+
+                </xpath>
+                <xpath expr="//footer" position="replace">
+                    <footer>
+                        <field name="id" invisible="1"/>
+                        <button string="Agendar fecha prueba" name="action_sheddule_fth" type="object" class="btn-primary" attrs="{'invisible': [ ('flagsh_shedule', '!=', True) ] } "/>
+                        <button string="Agendar fecha prueba(taller)" name="action_sheddule_scd" type="object" class="btn-primary" attrs="{'invisible': [ ('flagdeliv_shedule', '!=', True)] } "/>
+                        <button string="Schedule" name="action_close_dialog" type="object" class="btn-primary" attrs="{'invisible': ['|',('id', '!=', False),'|',('flagsh_shedule', '=', True),('flagdeliv_shedule', '=', True)]} "/>
+                        <button string="Save" name="action_close_dialog" type="object" class="btn-primary" attrs="{'invisible': ['|',('id', '=', False),'|',('flagsh_shedule', '=', True),('flagdeliv_shedule', '=', True)]}"/>
+                        <button attrs="{'invisible': ['|',('force_next', '=', True),'|',('flagsh_shedule', '=', True),('flagdeliv_shedule', '=', True)]}" string="Mark as Done" name="action_done" type="object" class="btn-secondary" context="{'mail_activity_quick_update': True}"/>
+                        <button attrs="{'invisible': ['|',('force_next', '=', True),'|',('flagsh_shedule', '=', True),('flagdeliv_shedule', '=', True)]}" string="Done &amp; Schedule Next" name="action_done_schedule_next" type="object" class="btn-secondary" context="{'mail_activity_quick_update': True}"/>
+                        <button attrs="{'invisible': ['|',('force_next', '=', False),'|',('flagsh_shedule', '=', True),('flagdeliv_shedule', '=', True)]}" string="Done &amp; Launch Next" name="action_done_schedule_next" type="object" class="btn-secondary" context="{'mail_activity_quick_update': True}"/>
+                        <button string="Discard" class="btn-secondary" special="cancel" />
+                    </footer>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>
+ 

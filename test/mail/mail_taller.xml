@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="message_notification_email">
+            <div>
+                <div t-if="has_button_access" itemscope="itemscope" itemtype="http://schema.org/EmailMessage">
+                    <div itemprop="potentialAction" itemscope="itemscope" itemtype="http://schema.org/ViewAction">
+                        <link itemprop="target" t-att-href="button_access['url']"/>
+                        <link itemprop="url" t-att-href="button_access['url']"/>
+                        <meta itemprop="name" t-att-content="button_access['title']"/>
+                    </div>
+                </div>
+                <div t-if="has_button_access or len(actions) &gt; 0 or not is_discussion" summary="o_mail_notification" style="padding: 0px; width:600px;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="width: 600px; margin-top: 5px;">
+                        <tbody>
+                            <tr>
+                                <td valign="center">
+                                    <a t-if="has_button_access" t-att-href="button_access['url']" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                        <t t-esc="button_access['title']"/>
+                                    </a>
+                                    <t t-if="actions">
+                                        <t t-foreach="actions" t-as="action">                |                
+                                            <a t-att-href="action['url']" style="color: #875A7B; text-decoration:none !important;">
+                                                <t t-esc="action['title']"/>
+                                            </a>
+                                        </t>
+                                    </t>
+                                </td>
+                                <td valign="center" align="right">
+                                    <img t-att-src="'/logo.png?company=%s' % company.id" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center;">
+                                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0 12px 0;"/>
+                                    <p t-if="subtype.internal" style="background-color: #f2dede; padding: 5px; margin-bottom: 16px;">
+                                        <strong>Internal communication</strong>: Replying will post an internal note. Followers won't receive any email notification.        
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-raw="message.body"/>
+                <ul t-if="tracking_values">
+                    <t t-foreach="tracking_values" t-as="tracking">
+                        <li>
+                            <t t-esc="tracking[0]"/>: 
+                            <t t-esc="tracking[1]"/> -&gt; 
+                            <t t-esc="tracking[2]"/>
+                        </li>
+                    </t>
+                </ul>
+                <div t-if="signature" t-raw="signature" style="font-size: 13px;"/>
+                <p style="color: #555555; margin-top:32px;">    Sent    
+                    <span t-if="company.name">    by    
+                        <a t-if="website_url" t-att-href="website_url" style="text-decoration:none; color: #875A7B;">
+                            <span t-esc="company.name"/>
+                        </a>
+                        <span t-if="not website_url" t-esc="company.name"/></span>    using    
+                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=email" style="text-decoration:none; color: #875A7B;">Kevin</a>.
+
+                </p>
+            </div>
+        </template>
+        <record id="mail_template_sheddule_work" model="mail.template">
+            <field name="name">Aviso taller</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Correcciones-${object.name}-${object.date_workshop}</field>
+            <field name="email_to"></field>
+            <field name="partner_to"></field>
+            <field name="body_html" type="html">
+            <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+            <table style="width:1000px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+                <tbody>
+                    <tr>
+                        <td style="padding:15px 20px 10px 20px; font-size:20px;">
+                            <p>
+                                Estimado colaborador se le informa que la venta <strong>${object.name}</strong>
+                            </p>
+                            <p>
+                                Solicita las siguientes correcciones:                              
+                            </p>
+                            <p>
+                                
+                            </p>
+                            <p>Fecha programada para su prueba : <strong>${object.date_workshop}</strong> </p>
+                            <div style="margin: 16px 0px 16px 0px;">
+                            </div>
+                        </td>
+                        <td style="padding:15px 20px 10px 20px;">
+                            <p style="text-align: center;">
+                                
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+                <script>
+                    console.log("asd")
+                </script>
+            </table>
+            </div>
+            </field>
+                        
+        </record>
+        <record id="mail_template_dropshiping" model="mail.template">
+            <field name="name">Aviso venta negativo</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Venta negativo-${object.name}-${object.date_workshop}</field>
+            <field name="email_to"></field>
+            <field name="partner_to"></field>
+            <field name="body_html" type="html">
+            <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+            <table style="width:1000px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+                <tbody>
+                    <tr>
+                        <td style="padding:15px 20px 10px 20px; font-size:20px;">
+                            <p>
+                                Estimado colaborador se han retirado productos de la venta <strong>${object.name}</strong>
+                            </p>
+                            <p>
+                                Se genero una orden de compra(si proveedor existe proveedor).                              
+                            </p>
+                            <p>Fecha programada para entrega : <strong>${object.event_date}</strong> </p>
+                            <div style="margin: 16px 0px 16px 0px;">
+                            </div>
+                        </td>
+                        <td style="padding:15px 20px 10px 20px;">
+                            <p style="text-align: center;">
+                                
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+                <script>
+                    console.log("asd")
+                </script>
+            </table>
+            </div>
+            </field>
+                        
+        </record>
+
+        <template id="mail_notification_workshop" name="Mail: Pay Now mail notification template">
+          
+            <tbody>
+                <tr>
+                    <td style="padding: 0">
+                        <t t-raw="message.body"/>
+                    </td>
+                </tr>
+                </tbody>
+        </template>
+    </data>
+</odoo>

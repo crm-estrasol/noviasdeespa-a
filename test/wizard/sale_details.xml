@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_details_wizard" model="ir.ui.view">
+        <field name="name">sale.details.wizard.form</field>
+        <field name="model">test.sale.details.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sales Details">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Generar reporte" type="object" class="btn-primary"/>
+
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="report_sale_wizard" model="ir.actions.act_window">
+        <field name="name">Corte ventas</field>
+        <field name="res_model">test.sale.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

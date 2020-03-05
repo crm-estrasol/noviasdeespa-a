@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+  <!---->
+    <record id="view_crm_crm_lead_inherite_kanban_view" model="ir.ui.view">
+      <field name="name">crm.lead.inherite.kanban.view</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+      <field name="arch" type="xml">
+      <button name="action_view_sale_quotation" position="replace">
+             
+              <field name="order_ids" invisible="1" />
+          
+              <button class="oe_stat_button" type="object" name="button_open_unique_quot" icon="fa-pencil-square-o" attrs="{'invisible': ['|' , ('type', '=', 'lead'),('order_ids', '=', [] ) ] } ">
+              Venta          
+          </button>
+      </button>
+        
+      </field>
+    </record>
+
+    <record id="inherit_crm_lead_form_buttons" model="ir.ui.view">
+      <field name="name">crm.lead.inherite.form.view</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+      <field name="arch" type="xml">
+        <!--
+        <xpath expr="//button[@name='action_set_won_rainbowman']" position="replace">
+          <button name="action_set_won_rainbowman" string="Mark Won" type="object" class="oe_highlight" invisible="1" />
+        </xpath>
+        
+        <xpath expr="//button[@name='159']" position="replace">
+          <button name="159" string="Mark Won" type="object" class="oe_highlight"  invisible="1" />
+        </xpath>
+        -->
+        <xpath expr="//field[@name='phone_state']" position="after">
+          <field name="event_date" required="1"/>
+           <field name="sale_note" invisible="1" />
+        </xpath>
+      </field>
+    </record>
+
+
+
+
+
+
+
+
+
+  </data>
+</odoo>
+ 

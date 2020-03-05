@@ -1,0 +1,117 @@
+<odoo>
+    <data>
+        <record id="inherit_sale_order" model="ir.ui.view">
+            <field name="name">sale.order.inherit.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree//field[@name='product_id']" position="after">
+                    <field name="count_transfers" />
+                    <button name="busqueda_activos" string="Cancelar entregas" type="object" attrs="{'invisible': [ ('count_transfers', '=', 0)] }"/>
+                </xpath>
+                
+               
+            </field>
+
+        </record>
+<!---->
+        
+
+        <record id="inherit_sale_order_form" model="ir.ui.view">
+            <field name="name">sale.order.inherit.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_quotation_send']" position="after">
+
+                    <button name="button_shedule_confirm" type="object" string="Asignar fecha prueba" attrs="{'invisible': ['|', ('shedule_confirm', '=', True),'|', ('state', '=', 'draft'),('state', '=', 'cancel')] }"/>
+                    <button name="button_shedule_workshop" type="object" string="Asignar fecha prueba (Ajustes)" attrs="{'invisible': [
+                                                                                                                  
+                                                                                                                 '|','&amp;', ('shedule_deliver', '=', True),('shedule_confirm', '=', True),
+                                                                                                                   ('shedule_confirm', '!=', True)
+                                                                                                                  
+                                                                                                                  ] } "/>
+                    <button name="button_delivered" type="object" string="Entregar" attrs="{'invisible':['|',('ready_sale','=',False),('paid','=',False)]}" />
+
+                        <field name="ready_sale" invisible="1"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+
+
+                    <field name="event_date" required="1"/>
+                    <field name="sale_note" />
+                    <field name="date_sheddule" readonly="1" />
+                    <field name="shedule_confirm" attrs="{'invisible': [ ('date_sheddule', '=', False)] ,'readonly': [ ('date_workshop', '!=', False)] }"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='date_order']" position="after">
+
+
+                    <field name="date_workshop" readonly="1" />
+                    <field name="shedule_deliver" attrs="{'invisible': [ ('date_workshop', '=', False)] }"/>
+                    <field name="paid" attrs="{'invisible': [ ('ready_sale', '=', False)]    }" />
+                    <field name="delivered" readonly="1" />
+
+
+
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                  
+                                       
+                                        <div class="oe_subtotal_footer_separator oe_inline o_td_label" style="margin-top:10px">
+                                            <label for="total_invoiced"/>
+                                        </div>
+                                        <field name="total_invoiced" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}" style="margin-top:10px"/>
+                   
+                </xpath>
+
+            </field>
+
+        </record>
+        
+        
+
+        <record id="inherit_sale_order_opportunity" model="ir.ui.view">
+            <field name="name">sale.order.inherit.form.opportunity</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_crm.sale_view_inherit123"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="replace">
+                    <field   
+                        name="opportunity_id" 
+                        help="Log in the chatter from which opportunity the order originates" 
+                        groups="base.group_no_one"   
+                        domain="[('order_ids', '=', False )]" context="{'default_event_date': event_date,'default_partner_id':partner_id,'default_planned_revenue':amount_total}"/>                                                                                                                                                                                                                          
+                </xpath>
+            </field>
+
+        </record>
+
+        
+        <!---->
+
+        
+    <record id="view_quotation_treepp" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.sale2.crm</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="total_invoiced" sum="Total Facturado" widget="monetary" />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="general_status"  />
+            </xpath>
+            
+        </field>
+    </record>
+
+        
+        
+    </data>
+</odoo>
+ 

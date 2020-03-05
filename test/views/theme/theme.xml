@@ -1,0 +1,30 @@
+<odoo>
+  <data>
+   
+
+    <template id="unique_t_id" name="custom" inherit_id="web._assets_primary_variables">
+
+            <xpath expr="." position="inside">
+
+               
+                <link rel="stylesheet" type="text/scss" href="/test/static/src/scss/theme.scss"/>
+                                                              
+            </xpath>
+        </template>
+          <template id="unique_t_ico" name="custom_2" inherit_id="web.assets_backend">
+
+            <xpath expr="." position="inside">
+
+               
+                <link rel="stylesheet" type="text/scss" href="/test/static/src/scss/theme_ico.scss"/>
+                     <script>
+                      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                     </script>                                         
+            </xpath>
+        </template>
+
+      
+
+</data>
+</odoo>
+ 
