@@ -225,6 +225,8 @@ class NoviasSaleOrder(models.Model):
         #po = self.env['purchase.order'].search( [('partner_id','=',3)] )
         #._cr.dictfetchall()
         #_logger.info("-----------------------------------"+str(self.env.user.warehouse_id.name ) )
+
+        
         
     def purchase_service_prepare_order_values_n(self, supplierinfo):
         """ Returns the values to create the purchase order from the current SO line.
